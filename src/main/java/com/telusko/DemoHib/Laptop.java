@@ -15,8 +15,8 @@ public class Laptop {
 	private String brand;
 	private String price;
 	
-	@ManyToOne
-	private Alien alien;
+//	@ManyToOne
+//	private Alien alien;
 	
 //	@ManyToOne()
 //	private Student student;
@@ -42,12 +42,12 @@ public class Laptop {
 //	public void setStudent(List<Student> student) {
 //		this.student = student;
 //	}
-	public Alien getAlien() {
-		return alien;
-	}
-	public void setAlien(Alien alien) {
-		this.alien = alien;
-	}
+//	public Alien getAlien() {
+//		return alien;
+//	}
+//	public void setAlien(Alien alien) {
+//		this.alien = alien;
+//	}
 	public String getBrand() {
 		return brand;
 	}

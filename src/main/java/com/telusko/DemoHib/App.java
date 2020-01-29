@@ -69,7 +69,7 @@ public class App
         
         //Configuration con = new Configuration().configure().addAnnotatedClass(Student.class).addAnnotatedClass(Laptop.class);
 
-    	Configuration con = new Configuration().configure().addAnnotatedClass(Student.class);
+    	Configuration con = new Configuration().configure().addAnnotatedClass(Laptop.class);
     	
         ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(con.getProperties()).buildServiceRegistry();
         
@@ -151,14 +151,14 @@ public class App
 //        query.addEntity(Student.class);
 //        List<Student> students = query.list();
         
-        SQLQuery query = session.createSQLQuery("select name,marks from student where marks > 60");
-        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-        List students = query.list();
-        
-        for(Object o : students) {
-        	Map m = (Map) o;
-        	System.out.println(m.get("name") + " : " + m.get("marks"));
-        }
+//        SQLQuery query = session.createSQLQuery("select name,marks from student where marks > 60");
+//        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+//        List students = query.list();
+//        
+//        for(Object o : students) {
+//        	Map m = (Map) o;
+//        	System.out.println(m.get("name") + " : " + m.get("marks"));
+//        }
         
         //////////////////////////////////////////////
         
@@ -180,29 +180,41 @@ public class App
          * 				Detached-------------------
          * 
          * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
          */
+        
+        
+//        Laptop l = new Laptop(); 
+//        l.setlId(107);
+//        l.setBrand("Lenovo");
+//        l.setPrice("700");
+//        
+//        session.save(l);
+//        l.setPrice("750");
+        
+        //session.delete(l); //to remove
         
         //////////////////////////////////////////////
         
+//        Laptop lap = (Laptop) session.get(Laptop.class, 102); //it hits database
+        
+        Laptop lap = (Laptop) session.load(Laptop.class, 102); //it gives you proxy object. it will hit later
+        try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        System.out.println(lap);
+        
+//        if data is not found load will throw ObjectNotFound exception which can be handled, get just throw null
+        
+        //////////////////////////////////////////////
         session.getTransaction().commit();
+        
+//        session.evict(l);
+//        l.setPrice("600");
+        
         session.close();
         
         ///////////////////////////////////////////////
